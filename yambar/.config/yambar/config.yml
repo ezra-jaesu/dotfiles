@@ -1,0 +1,58 @@
+colors: 
+# red -> de4d60ff
+# black -> 171518ff
+# white -> ffffffff
+
+  border: &border 171518ff
+  icon: &icon de4d60ff
+  main_font: &main_font "DepatureMono Nerd Font Mono:pixelsize=12"
+  icon_font: &icon_font ":pixelsize=24"
+
+bar:
+  location: top
+  monitor: HDMI-A-1
+  height: 30
+  foreground: 000000ff
+  background: ffffff00
+  font: *main_font
+  border: 
+    width: 1
+    color: *border 
+    margin: 10
+    bottom-margin: 0
+
+  left:
+    - clock:
+        time-format: "%H:%M:%S"
+        content:
+          - string: { text: " \U000f0954 ", font: *icon_font, foreground: *icon }
+          - string: { text: " {time} ", foreground: *border }
+    - cpu:
+        poll-interval: 1000
+        content:
+            map: 
+              conditions:
+                id < 0:
+                  - string: { text: " \U000f0ee0 ", font: *icon_font, foreground: *icon }
+                  - string: { text: " {cpu} % ", foreground: *border }
+                id >= 0:
+
+                  - ramp:
+                      tag: cpu
+                      items:
+                        - string: {text: ▁}
+                        - string: {text: ▂}
+                        - string: {text: ▃}
+                        - string: {text: ▄}
+                        - string: {text: ▅}
+                        - string: {text: ▆}
+                        - string: {text: ▇}
+                        - string: {text: █}
+    - mem:
+        poll-interval: 1000
+        content:
+          - string: { text: " \U0000efc5 ", font: *icon_font, foreground: *icon }
+          - string: { text: " {percent_used} % ", foreground: *border }
+
+
+
