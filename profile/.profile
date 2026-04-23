@@ -20,4 +20,5 @@ export PATH=$PATH:/home/ezra/bin/ccache-links
 export ENV="~/.kshrc"
 . ./.kshrc
 
-#exec dwl
+# Start mango with dbus  on log in
+dbus-run-session mango
